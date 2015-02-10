@@ -1,7 +1,7 @@
 """Query the IronVoice API."""
 
 import urllib
-
+import json
 
 class ivapi:
     
@@ -20,27 +20,28 @@ class ivapi:
         except:
             raise Exception('Invalid host and/or API key.')
 
-    def _make_query(self, method, params = None):
+    def make_query(self, method, params = None):
         query_url = '{}&method={}'.format(self.base_url, method)
-        if isinstance(params, dict):
-            for param in params.items():
-                if param[1]:
-                    query_url = '{}&{}={}'.format(query_url, param)
-                else:
-                    query_url = '{}&{}'.format(query_url, param[0])
-        return urllib.urlopen(query_url)
+        if params and len(params) > 0:
+            for key, value in params:
+                query_url = '{}&{}={}'.format(query_url, key, value)
+        reply = next(urllib.urlopen(query_url), None)
+        if reply:
+            try:
+                return json.loads(reply)
+            except:
+                return reply
+        else:
+            return None
 
     def trace(self, host):
-        result = self._make_query(
-                method = 'trace',
-                params = {'host': str(host)},
+        return self.make_query(
+                    method = 'trace',
+                    params = (
+                        ('host', str(host)),
+                    )
         )
-        hops = []
-        return hops
 
     def peers(self):
-        results = self._make_query(method = 'peers')
-        for result in results:
-            print result
+        return self.make_query(method = 'peers')
 
-    
