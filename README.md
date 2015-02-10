@@ -27,12 +27,14 @@ transfer |	uid, extension |	Transfers a call with the specified uid to the speci
 set |	variable,value |	Sets a variable with the specified value
 get |	variable |	Gets the value of the specified variable
 
-Variable 	Values 	Description
-afterhours 	1,0 	Enable or disable after hours mode
-Example Usage
+Variable |	Values |	Description
+---------|---------|-------------
+afterhours |	1,0 |	Enable or disable after hours mode
 
-https://<server>/api?key=<key>&method=call&dnid=2055551234&extension=801
+####Example Usage
 
-Response
+`https://<server>/api?key=<key>&method=call&dnid=2055551234&extension=801`
+
+####Response
 
 A JSON object will be returned with the requested data or "OK" if the operation was performed successfully.
