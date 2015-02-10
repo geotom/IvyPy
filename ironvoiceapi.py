@@ -31,7 +31,7 @@ class ivapi:
         return urllib.urlopen(query_url)
 
     def trace(self, host):
-        result = _make_query(
+        result = self._make_query(
                 method = 'trace',
                 params = {'host': str(host)},
         )
