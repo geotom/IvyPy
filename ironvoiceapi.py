@@ -20,28 +20,74 @@ class ivapi:
         except:
             raise Exception('Invalid host and/or API key.')
 
-    def make_query(self, method, params = None):
+    def make_query(self, method, **kwargs):
         query_url = '{}&method={}'.format(self.base_url, method)
-        if params and len(params) > 0:
-            for key, value in params:
-                query_url = '{}&{}={}'.format(query_url, key, value)
+        for key, value in kwargs.items():
+            query_url = '{}&{}={}'.format(query_url, key, value)
         reply = next(urllib.urlopen(query_url), None)
-        if reply:
-            try:
-                return json.loads(reply)
-            except:
-                return reply
-        else:
-            return None
+        try:
+            return json.loads(reply)
+        except:
+            return reply
 
     def trace(self, host):
         return self.make_query(
-                    method = 'trace',
-                    params = (
-                        ('host', str(host)),
-                    )
+                method = 'trace',
+                host = str(host),
         )
 
     def peers(self):
-        return self.make_query(method = 'peers')
+        return self.make_query(
+                method = 'peers',
+        )
 
+    def recording(self, uid):
+        return self.make_query(
+                method = 'recording',
+                uid = str(uid),
+        )
+
+    def recordings(self, extension):
+        return self.make_query(
+                method = 'recordings',
+                extension = str(extension),
+        )
+
+    def call(self, dnid, extension, cid):
+        return self.make_query(
+                method = 'call',
+                dnid = str(dnid),
+                extension = str(extension),
+                cid = str(cid),
+        )
+
+    def fax(self):
+        return self.make_query(
+                method = 'fax',
+        )
+
+    def inbox(self, mailbox):
+        return self.make_query(
+                method = 'inbox',
+                mailbox = str(mailbox),
+        )
+
+    def voicemail(self, mailbox):
+        return self.make_query(
+                method = 'voicemail',
+                mailbox = str(mailbox),
+        )
+
+    def archive(self, mailbox, message):
+        return self.make_query(
+                method = 'archive',
+                mailbox = str(mailbox),
+                message = str(message),
+        )
+
+    def cleanup(self, mailbox):
+        return self.make_query(
+                method = 'cleanup',
+                mailbox = str(mailbox),
+        )
+    
