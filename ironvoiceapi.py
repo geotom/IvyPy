@@ -91,3 +91,54 @@ class ivapi:
                 mailbox = str(mailbox),
         )
     
+    def purge(self, mailbox):
+        return self.make_query(
+                method = 'purge',
+                mailbox = str(mailbox),
+        )
+
+    def prompt(self, prompt, **kwargs):
+        if 'dnid' in kwargs:
+            arg = dict((('dnid', kwargs['dnid']),))
+        elif 'extension' in kwargs:
+            arg = dict((('extension', kwargs['extension']),))
+        else:
+            return None
+        return self.make_query(
+                method = 'prompt',
+                prompt = prompt,
+                **arg
+        )
+
+    def play(self, prompt, **kwargs):
+        if 'dnid' in kwargs:
+            arg = dict((('dnid', kwargs['dnid']),))
+        elif 'extension' in kwargs:
+            arg = dict((('extension', kwargs['extension']),))
+        else:
+            return None
+        return self.make_query(
+                method = 'play',
+                prompt = prompt,
+                **arg
+        )
+
+    def transfer(self, uid, extension):
+        return self.make_query(
+                method = 'transfer',
+                uid = str(uid),
+                extension = str(extension),
+        )
+
+    def set_var(self, variable, value):
+        return self.make_query(
+                method = 'set',
+                variable = str(variable),
+                value = str(value),
+        )
+
+    def get_var(self, variable):
+        return self.make_query(
+                method = 'get',
+                variable = str(variable),
+        )
