@@ -1,12 +1,30 @@
 # IvyPy
+
 Python server (CherryPy) and tools for the IronVoice API.
 
-##Module: ironvoiceapi.py
-Provides access to the IronVoice REST API, defined as follows:
+## Module: ironvoiceapi.py
 
+Provides a _very_ thin wrapper around the IronVoice REST API.  Aeach IronVoice API method is a function which will accept almost any argument and try to give back _something_ (even if it's nothing) without raising an error.  First it will try to parse any response as JSON and return it a Python object.  Then it will try to return the bare response. Lastly, it will return `None`.
+
+Creation of the `ivapi` class requires either passing of a valid host and API key, or the module must be able to import a valid ironvoiceapi_conf.py file, which looks like this:
+
+    host = ''  # Example: 'http://foo.ironvoice.com'  The protocol (the http: part) _is_ required
+    key = ''  # Your IronVoice API key, available under the Global Settings menu of the IronVoice site
+
+#### Example Usage
+
+    >>>import ironvoiceapi
+    >>>iva = ironvoiceapi.ivapi(
+        host = 'http://foo.ironvoice.com',
+        key = '*************************'
+        )
+    >>>peers = iva.peers()
+    >>>print peers['800']
+    {'ip': '127.0.0.1', 'ping': '91', 'port': '1037'}
+
+#### IronVoice API Reference
 
 Note: Depending on your plan some methods may not be available.
-Reference
 
 Method | Parameters | Description
 -------|------------|------------
@@ -31,10 +49,3 @@ Variable |	Values |	Description
 ---------|---------|-------------
 afterhours |	1,0 |	Enable or disable after hours mode
 
-####Example Usage
-
-`https://<server>/api?key=<key>&method=call&dnid=2055551234&extension=801`
-
-####Response
-
-A JSON object will be returned with the requested data or "OK" if the operation was performed successfully.
