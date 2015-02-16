@@ -4,7 +4,7 @@ Python server (CherryPy) and tools for the IronVoice API.
 
 ## Module: ironvoiceapi.py
 
-Provides a _very_ thin wrapper around the IronVoice REST API.  Aeach IronVoice API method is a function which will accept almost any argument and try to give back _something_ (even if it's nothing) without raising an error.  First it will try to parse any response as JSON and return it a Python object.  Then it will try to return the bare response. Lastly, it will return `None`.
+Provides a _very_ thin wrapper around the IronVoice REST API.  Each IronVoice API method is represented in the `ivapi` class, which will accept almost any argument and try to give back _something_ (even if it's nothing) without raising an error.  First it will try to parse any response as JSON and return it as a Python dictionary.  Then it will try to return the bare response. Lastly, it will return `None` upon failure.
 
 Creation of the `ivapi` class requires either passing of a valid host and API key, or the module must be able to import a valid ironvoiceapi_conf.py file, which looks like this:
 
