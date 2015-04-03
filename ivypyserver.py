@@ -1,10 +1,13 @@
 import cherrypy
 
 
-class Root(object):
+class AenHost(object):
     @cherrypy.expose
-    def extension(self, ext = None):
-        return str(ext)
+    def index(self, event, uid, cid, dnid, extension=None):
+        return 'AEN Okay'
 
 if __name__ == '__main__':
-    cherrypy.quickstart(Root(), '/')
+    cherrypy.tree.mount(AenHost(), '/aen', aen_conf)
+
+    cherrypy.engine.start()
+    cherrypy.engine.block()
