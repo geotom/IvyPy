@@ -1,7 +1,6 @@
 Application Event Notifications
 ===
-Documentation from Ironvoice
----
+###Documentation from Ironvoice
 
 With the Application Event Notifications settings you can connect our service to your applications using simple web services.
 
@@ -12,7 +11,7 @@ With the Application Event Notifications settings you can connect our service to
 * Path - The path to the page on your web server that will handle the request
 
 Event Notifications
-===
+---
 
 Our service can be configured to notify your web based application in real-time with the following events:
 
@@ -30,6 +29,7 @@ As an example for an inbound call the complete POST might look like this:
 `https://<server>/<path>?event=inbound&uid=1368018803.329176&cid=2055551234&dnid=8005884096`
 
 Application Event Feed
+---
 
 You can poll real-time call status using your API server and key:
 
