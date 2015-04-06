@@ -7,7 +7,7 @@ class AenHost(object):
         return 'AEN Okay'
 
 if __name__ == '__main__':
-    cherrypy.tree.mount(AenHost(), '/aen', aen_conf)
+    cherrypy.tree.mount(AenHost(), '/aen', 'aen_conf')
 
     cherrypy.engine.start()
     cherrypy.engine.block()
